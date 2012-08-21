@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Backbone Example</title>
+</head>
+<body>
+<div class="headerMenuArea" style=" padding: 50px;">
+    <a href="#searchTerm/term1/-1">방문 통계</a> | <a href="#shopInfo">매장 정보 관리</a>
+</div>
+<div id="searchTermArea" style="display: none; padding: 50px;">
+    <div style="padding: 10px 10px 10px 0;">
+        <a href="#searchTerm/term1/-1">어제</a> <a href="#searchTerm/term2/-7">최근 일주일</a> <a href="#searchTerm/term3/-30">최근1개월</a> <a href="#searchTerm/term4/-60">최근2개월</a> <a href="#searchTerm/term5/-90">최근3개월</a>
+    </div>
+    <div id="term1" style="display: none;">
+        <a href="#searchTerm/term1/-1">기간 2012.07.15~2012.07.16</a><br>
+    </div>
+    <div id="term2" style="display: none;">
+        <a href="#searchTerm/term2/-7">기간 2012.07.09~2012.07.16</a><br>
+    </div>
+    <div id="term3" style="display: none;">
+        <a href="#searchTerm/term3/-30">기간 2012.06.16~2012.07.16</a><br>
+    </div>
+    <div id="term4" style="display: none;">
+        <a href="#searchTerm/term4/-60">기간 2012.05.16~2012.07.16</a><br>
+    </div>
+    <div id="term5" style="display: none;">
+        <a href="#searchTerm/term5/-90">기간 2012.04.16~2012.07.16</a><br>
+    </div>
+</div>
+<div id="shopInfoArea" style="display: none; padding: 50px;">
+    가계 정보
+</div>
+<script src="./js/libs/jquery-1.7.2.min.js"></script>
+<script src="http://underscorejs.org/underscore.js"></script>
+<script src="http://backbonejs.org/backbone.js"></script>
+<script type="text/javascript">
+$(function() {
+    var SearchTermView = Backbone.View.extend({
+        el: "#searchTermArea",
+        currentTermArea: null,
+        events: {
+        },
+        initialize: function(){
+
+        },
+        render: function(termAreaId, term) {
+            $(this.el).show();
+            $("#" + termAreaId).show();
+            
+            if(this.currentTermArea && (this.currentTermArea.attr("id") != termAreaId)) {
+                this.currentTermArea.hide();                
+            }
+            
+            this.currentTermArea = $("#" + termAreaId);
+        },
+        setModelAndRender: function(data) {
+            this.render(data.termAreaId, data.term);
+        },
+        hide: function() {
+            $(this.el).hide();
+        }
+    });
+    
+    var ShopInfoView = Backbone.View.extend({
+        el: "#shopInfoArea",
+        events: {
+        },
+        initialize: function(){
+        },
+        render: function() {
+            $(this.el).show();
+        },
+        setModelAndRender: function() {
+            this.render();
+        },
+        hide: function() {
+            $(this.el).hide();
+        }
+    });
+    
+    var AppRouter = Backbone.Router.extend({
+        routes: {
+            "": "searchTerm",
+            "searchTerm/:termAreaId/:term": "searchTerm",
+            "shopInfo": "shopInfo"
+        },
+        initialize: function() {
+            this.searchTermView = new SearchTermView();
+            this.ShopInfoView = new ShopInfoView();
+        },
+        searchTerm: function(termAreaId, term) {
+            if(termAreaId === undefined && term === undefined) {
+                Backbone.history.navigate("searchTerm/term1/-1", {trigger: true});
+				return;
+            }
+            
+            this.render(this.searchTermView, {"termAreaId": termAreaId, "term": term});
+        },
+        shopInfo: function() {
+            this.render(this.ShopInfoView, null);
+
+        },
+        render: function(view, data) {
+            if(this.currentView && (this.currentView != view)) {
+                this.currentView.hide();
+            }
+            
+            view.setModelAndRender(data);
+            
+            this.currentView = view;
+            return this;
+        }
+    });
+
+
+    var appRouter = new AppRouter();
+    Backbone.history.start();
+});
+</script>
+    
+</body>
+</html>
