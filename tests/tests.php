@@ -132,7 +132,7 @@ $db = new FileLog('tests_16.tsv');
 tests($db->load(0, 1), $db->load(0, 1));	// 파일을 생성하는 식으로 변경
 
 #17
-$db = new FileLog('tests_17.tsv', array('var1', 'var2'), true);
+$db = new FileLog('tests_17.tsv', array('var1', 'var2'));
 $db->save(array('text1', 'text2'));
 $db = new FileLog('tests_17.tsv', array('var1', 'var2'), true);
 $db->save(array('text3', 'text4'));
