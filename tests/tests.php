@@ -57,7 +57,7 @@ tests($db->load(-2), array(
 unlink('./data.tsv');
 
 #7
-$db = new FileLog(array('name', 'body', 'date'));
+$db = new FileLog('data.tsv', array('name', 'body', 'date'));
 $db->save(array('F', '2012-6-30 22:05:17', strtotime('2012-6-30 22:05:17')));
 $db->save(array('P', '2012-7-1 00:00:00', strtotime('2012-7-1 00:00:00')));
 $db->save(array('P', '2012-7-31 23:59:59', strtotime('2012-7-31 23:59:59')));
@@ -77,31 +77,31 @@ tests($db->load_by_date('2012-07-01 00:00:00', '2012-07-31 23:59:59', 'date'), a
 unlink('./data.tsv');
 
 #8
-$db = new FileLog(array('text1', 'text2'));
+$db = new FileLog('data.tsv', array('text1', 'text2'));
 $db->save(array("123\t456", "789\n000"));
 tests($db->load(), array(array('text1' => "123\t456", 'text2' => "789\n000")));
 unlink('./data.tsv');
 
 #9
-$db = new FileLog(array('text1', 'text2'));
+$db = new FileLog('data.tsv', array('text1', 'text2'));
 $db->save(array('123\t456', '789\n000'));
 tests($db->load(), array(array('text1' => '123\t456', 'text2' => '789\n000')));
 unlink('./data.tsv');
 
 #10
-$db = new FileLog(array('text1', 'text2'));
+$db = new FileLog('data.tsv', array('text1', 'text2'));
 $db->save(array('123\456', '789\\000'));
 tests($db->load(), array(array('text1' => '123\456', 'text2' => '789\\000')));
 unlink('./data.tsv');
 
 #11
-$db = new FileLog(array('text1', 'text2'));
+$db = new FileLog('data.tsv', array('text1', 'text2'));
 $db->save(array("123\t\t456", "789\n\n000"));
 tests($db->load(), array(array('text1' => "123\t\t456", 'text2' => "789\n\n000")));
 unlink('./data.tsv');
 
 #12
-$db = new FileLog(array('ip', 'text'));
+$db = new FileLog('data.tsv', array('ip', 'text'));
 $db->save(array('192.168.123.123', 'HOME'));
 $db->save(array('211.62.44.161', 'OFFICE'));
 $db->save(array('211.62.44.150', 'OFFICE2'));
@@ -121,7 +121,7 @@ tests($db->load_by_search('211.62.', 'ip'), array(
 unlink('./data.tsv');
 
 #15
-$db = new FileLog(array('text'));
+$db = new FileLog('data.tsv', array('text'));
 $text = file_get_contents('tests_15.html');
 $db->save(array($text));
 tests(count(file('data.tsv')), 2);
@@ -132,16 +132,16 @@ $db = new FileLog('tests_16.tsv');
 tests($db->load(0, 1), $db->load(0, 1));	// 파일을 생성하는 식으로 변경
 
 #17
-$db = new FileLog(array('var1', 'var2'), 'tests_17.tsv');
+$db = new FileLog('tests_17.tsv', array('var1', 'var2'), true);
 $db->save(array('text1', 'text2'));
-$db = new FileLog(array('var1', 'var2'), 'tests_17.tsv');
+$db = new FileLog('tests_17.tsv', array('var1', 'var2'), true);
 $db->save(array('text3', 'text4'));
 $db = new FileLog('tests_17.tsv');
 tests($db->load(), array(array('var1' => 'text3', 'var2' => 'text4')));
 unlink('tests_17.tsv');
 
 #18
-$db = new FileLog(array('id', 'name'), 'tests_18.tsv');
+$db = new FileLog('tests_18.tsv', array('id', 'name'));
 $db->save(array('1', 'this is 1'));
 $db->save(array('1', 'this is 1-1'));
 $db->save(array('2', 'this is 2'));

@@ -12,13 +12,12 @@ class FileLog {
 		date_default_timezone_set('Asia/Seoul');
 
 		$this->file_name = $file_name;
-		$this->structure = $structure;
 
 		if (!file_exists($this->file_name) || $overwrite == true) {
-			fwrite(fopen($this->file_name, 'w'), implode("\t", $this->structure) . "\n");
+			fwrite(fopen($this->file_name, 'w'), implode("\t", $structure) . "\n");
 		}
 
-		if ($this->$structure == null) {
+		if ($structure == null) {
 			$structure_string = fgets(fopen($this->file_name, 'r'));
 			$this->structure = explode("\t", trim($structure_string));
 		} else {
