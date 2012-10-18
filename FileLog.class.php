@@ -12,19 +12,17 @@ class FileLog {
 		date_default_timezone_set('Asia/Seoul');
 
 		$this->file_name = $file_name;
+		$this->structure = $structure;
 
-		if ($structure == null && !file_exists($this->file_name)) {
-			echo('File does not exists.' . "\n");
-			exit();
-		} else if ($structure == null) {
+		if (!file_exists($this->file_name) || $overwrite == true) {
+			fwrite(fopen($this->file_name, 'w'), implode("\t", $this->structure) . "\n");
+		}
+
+		if ($this->$structure == null) {
 			$structure_string = fgets(fopen($this->file_name, 'r'));
 			$this->structure = explode("\t", trim($structure_string));
 		} else {
 			$this->structure = $structure;
-		}
-
-		if ($overwrite) {
-			fwrite(fopen($this->file_name, 'w'), implode("\t", $this->structure) . "\n");
 		}
 	}
 

@@ -18,7 +18,7 @@ function tests($actual, $expected) {
 }
 
 #1
-$db = new FileLog(array('var1', 'var2', 'var3'));
+$db = new FileLog('data.tsv', array('var1', 'var2', 'var3'));
 $db->save(array('this', 'this', 'this and this'));
 $db->save(array('this', '', 'this and this'));
 $db->save(array('this', 'this', ''));
