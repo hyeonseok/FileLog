@@ -8,28 +8,23 @@ class FileLog {
 	private $structure;
 	private $file_name;
 
-	public function __construct($arg1, $arg2 = null) {
+	public function __construct($file_name, $structure = null, $overwrite = false) {
 		date_default_timezone_set('Asia/Seoul');
 
-		if (is_array($arg1)) {
-			// overwrite mode
-			$this->structure = $arg1;
-			if ($arg2 == null) {
-				$file_name = './data.tsv';
-			} else {
-				$file_name = $arg2;
-			}
-			$this->file_name = $file_name;
-			fwrite(fopen($this->file_name, 'w'), implode("\t", $arg1) . "\n");
+		$this->file_name = $file_name;
+
+		if ($structure == null && !file_exists($this->file_name)) {
+			echo('File does not exists.' . "\n");
+			exit();
+		} else if ($structure == null) {
+			$structure_string = fgets(fopen($this->file_name, 'r'));
+			$this->structure = explode("\t", trim($structure_string));
 		} else {
-			// add mode
-			$this->file_name = $arg1;
-			if ($arg2 == null) {
-				$structure_string = fgets(fopen($this->file_name, 'r'));
-				$this->structure = explode("\t", trim($structure_string));
-			} else {
-				$this->structure = $arg2;
-			}
+			$this->structure = $structure;
+		}
+
+		if ($overwrite) {
+			fwrite(fopen($this->file_name, 'w'), implode("\t", $this->structure) . "\n");
 		}
 	}
 
