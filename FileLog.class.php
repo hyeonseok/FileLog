@@ -13,6 +13,11 @@ class FileLog {
 
 		$this->file_name = $file_name;
 
+		if (!file_exists($this->file_name) && ($structure == null || is_array($structure) === false)) {
+			echo('You must specify file structure.' . "\n");
+			exit();
+		}
+
 		if (!file_exists($this->file_name) || $overwrite == true) {
 			fwrite(fopen($this->file_name, 'w'), implode("\t", $structure) . "\n");
 		}
