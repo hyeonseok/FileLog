@@ -117,7 +117,7 @@ class FileLog {
 		return $data;
 	}
 
-	public function load_by_date($start_date = false, $end_date = false, $field_name = null) {
+	public function load_by_date($start_date, $end_date, $field_name) {
 		$data = array();
 
 		$fp = fopen($this->file_name, 'r');
