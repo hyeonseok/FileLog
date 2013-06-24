@@ -153,4 +153,24 @@ tests($db->load_by_match('1', 'id'), array(array('id' => '1', 'name' => 'this is
 #19
 tests($db->load_by_match('1', 'id', true), array('id' => '1', 'name' => 'this is 1-1'));
 unlink('tests_18.tsv');
+
+#20
+$db = new FileLog('data.tsv', array('name', 'body', 'date'));
+$db->save(array('F', '2012-6-30 22:05:17', strtotime('2012-6-30 22:05:17')));
+$db->save(array('P', '2012-7-1 00:00:00', strtotime('2012-7-1 00:00:00')));
+$db->save(array('P', '2012-7-31 23:59:59', strtotime('2012-7-31 23:59:59')));
+$db->save(array('F', '2012-8-1 00:00:00', strtotime('2012-8-1 00:00:00')));
+tests($db->load_by_month('7', '2012', 'date'), array(
+	0 => array (
+		'name' => 'P',
+		'body' => '2012-7-1 00:00:00',
+		'date' => strtotime('2012-7-1 00:00:00'),
+	),
+	1 => array (
+		'name' => 'P',
+		'body' => '2012-7-31 23:59:59',
+		'date' => strtotime('2012-7-31 23:59:59'),
+	),
+));
+unlink('./data.tsv');
 ?>

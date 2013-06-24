@@ -136,6 +136,25 @@ class FileLog {
 		return $data;
 	}
 
+	public function load_by_month($month, $year, $field_name) {
+		$data = array();
+
+		$fp = fopen($this->file_name, 'r');
+		while (($buffer = fgets($fp)) !== false) {
+			if (strlen(trim($buffer)) < 1) {
+				continue;
+			}
+			$formatted_row = $this->format_row($buffer);
+			if (!is_numeric($formatted_row[$field_name]) || !(date('Ym', $formatted_row[$field_name]) == $year . (strlen($month) < 2 ? '0' : '') . $month)) {
+				continue;
+			}
+			array_push($data, $formatted_row);
+		}
+		fclose($fp);
+
+		return $data;
+	}
+
 	public function load_by_match($keyword, $field_name = null, $unique = false) {
 		$data = array();
 

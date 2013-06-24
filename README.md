@@ -47,9 +47,16 @@ If you give negative offset, it will retrive the data from the last one(most rec
 
 	$data = $access_log->load(-100);
 
-TO BE DOCUMENTED...
+If data has a timestamp column, you can get specific range of data with load_by_data() method.
 
 	$data = $access_log->load_by_date($start_date, $end_date, $field_name);
+
+If you specify the month and year, you can get matching data with load_by_month() method.
+
+	$data = $access_log->load_by_month($year, $month, $field_name);
+
+TO BE DOCUMENTED...
+
 	$data = $access_log->load_by_match($keyword, $field_name);
 	$data = $access_log->load_by_match($keyword, $field_name, $unique);	// This will retrive last matched one.
 	$data = $access_log->load_by_search($keyword, $field_name);
