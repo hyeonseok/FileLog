@@ -52,24 +52,14 @@ class FileLog {
 	}
 
 	private function decode_string($str) {
-		$decoded_string = '';
-		while (($slash_position = strpos($str, "\\")) !== false ) {
-			$former_string = substr($str, 0, $slash_position);
-			$next_character = substr($str, $slash_position + 1, 1);
-			$latter_string = substr($str, $slash_position + 2);
-			if ($next_character == "\\") {
-				$replace_character = "\\";
-			} else if ($next_character == "t") {
-				$replace_character = "\t";
-			} else if ($next_character == "r") {
-				$replace_character = "\r";
-			} else if ($next_character == "n") {
-				$replace_character = "\n";
-			}
-			$decoded_string .= $former_string . $replace_character;
-			$str = $latter_string;
+		$temp = explode("\\\\", $str);
+		$count = count($temp);
+		for ($i = 0; $i < $count; $i++) { 
+			$temp[$i] = str_replace("\\t", "\t", $temp[$i]);
+			$temp[$i] = str_replace("\\r", "\r", $temp[$i]);
+			$temp[$i] = str_replace("\\n", "\n", $temp[$i]);
 		}
-		return $decoded_string . $str;
+		return implode("\\", $temp);
 	}
 
 	public function save($data) {
