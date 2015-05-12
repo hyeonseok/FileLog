@@ -35,10 +35,10 @@ class FileLog {
 	}
 
 	private function format_row($row) {
-		$split = explode("\t", trim($row));
+		$split = explode("\t", $row);
 		$row_data = array();
 		foreach ($this->structure as $key => $field) {
-			$row_data[$field] = $this->decode_string($split[$key]);
+			$row_data[$field] = $this->decode_string(trim($split[$key]));
 		}
 		return $row_data;
 	}
