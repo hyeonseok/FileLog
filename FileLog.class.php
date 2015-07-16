@@ -2,6 +2,7 @@
 /**
  * Stores array data in simple tsv like file format.
  * Retrives data by range, date, keyword search.
+ * https://github.com/hyeonseok/FileLog
  */
 
 class FileLog {
