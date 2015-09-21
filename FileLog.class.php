@@ -9,7 +9,7 @@ class FileLog {
 	private $structure;
 	private $file_name;
 
-	public function __construct($file_name, $structure = null, $overwrite = false) {
+	public function __construct($file_name, $structure = null) {
 		date_default_timezone_set('Asia/Seoul');
 
 		$this->file_name = $file_name;
@@ -18,7 +18,7 @@ class FileLog {
 			$this->trace('You must specify file structure.' . "\n");
 		}
 
-		if (!file_exists($this->file_name) || $overwrite == true) {
+		if (!file_exists($this->file_name)) {
 			fwrite(fopen($this->file_name, 'w'), implode("\t", $structure) . "\n");
 		}
 

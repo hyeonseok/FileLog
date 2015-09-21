@@ -22,10 +22,6 @@ If specified file is not exist, it try to make a file with a given name. The dat
 
 	$access_log = new FileLog('access_log.tsv', array('id', 'ip', 'time', 'uas'));
 
-If you want to overwrite data every time, set 3rd argument to true.
-
-	$access_log = new FileLog('access_log.tsv', array('id', 'ip', 'time', 'uas'), true);
-
 You can add log item to file using save method by set data in PHP array type.
 
 	$access_log->save(array(
