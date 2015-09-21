@@ -1,8 +1,6 @@
 <?php
 require('../FileLog.class.php');
 
-$count = 1;
-
 function tests($actual, $expected) {
 	if ($actual == $expected) {
 		echo('PASS' . "\n");
