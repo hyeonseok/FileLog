@@ -9,30 +9,19 @@ class FileLog {
 	private $structure;
 	private $file_name;
 
-	public function __construct($file_name, $structure = null) {
+	public function __construct($file_name) {
 		date_default_timezone_set('Asia/Seoul');
 
 		$this->file_name = $file_name;
 
-		if (!file_exists($this->file_name) && ($structure == null || is_array($structure) === false)) {
-			$this->trace('You must specify file structure.' . "\n");
-		}
-
-		if (!file_exists($this->file_name)) {
-			fwrite(fopen($this->file_name, 'w'), implode("\t", $structure) . "\n");
-		}
-
-		if ($structure == null) {
+		if (file_exists($this->file_name)) {
 			$structure_string = fgets(fopen($this->file_name, 'r'));
 			$this->structure = explode("\t", trim($structure_string));
-		} else {
-			$this->structure = $structure;
 		}
 	}
 
-	private function trace($message) {
-		echo($message . "\n");
-		exit();
+	private function create_file() {
+		fwrite(fopen($this->file_name, 'w'), implode("\t", $this->structure) . "\n");
 	}
 
 	private function format_row($row) {
@@ -64,14 +53,16 @@ class FileLog {
 	}
 
 	public function save($data) {
+		if (!is_array($this->structure)) {
+			$this->structure = array_keys($data);
+			$this->create_file();
+		}
 		$fp = fopen($this->file_name, 'a');
-		if (count($this->structure) != count($data)) {
-			$this->trace('Data length mismatched. ' . count($this->structure) . ' vs. ' . count($data));
+		$items = array();
+		foreach ($this->structure as $key => $value) {
+			$items[$value] = $this->encode_string($data[$value]);
 		}
-		foreach ($data as $item) {
-			$str .= $this->encode_string($item) . "\t";
-		}
-		$str .= "\n";
+		$str = implode("\t", array_values($items)) . "\n";
 		$str = str_replace("\t\n", "\n", $str);
 		fwrite($fp, $str);
 		fclose($fp);

@@ -14,21 +14,15 @@ Simply start by giving a file name.
 
 	$access_log = new FileLog('access_log.tsv');
 
-The 1st line of 'access_log.tsv' should contain the data fields in TSV format.
+If specified file is not exist, it try to make a file when first data is comming.
 
-	id	ip	time	uas
-
-If specified file is not exist, it try to make a file with a given name. The data fields structure must set as a 2nd argument in PHP array type.
-
-	$access_log = new FileLog('access_log.tsv', array('id', 'ip', 'time', 'uas'));
-
-You can add log item to file using save method by set data in PHP array type.
+You can add log item to file using save function.
 
 	$access_log->save(array(
-		uniqueid(), 
-		$_SERVER['REMOTE_ADDR'], 
-		time(), 
-		$_SERVER['HTTP_USER_AGENT']
+		'id' => uniqueid(), 
+		'ip' => $_SERVER['REMOTE_ADDR'], 
+		'time' => time(), 
+		'uas' => $_SERVER['HTTP_USER_AGENT']
 	));
 
 There are several methods for loading data. The load() method will load entire data in array.
