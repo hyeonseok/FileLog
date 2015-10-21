@@ -199,4 +199,9 @@ tests($db->load_by_month('07', '2012', 'date'), array(
 	),
 ));
 unlink('./data.tsv');
+
+#23
+echo('#23: ');
+$db = new FileLog('data.tsv');
+tests($db->get_max('id'), 0);
 ?>

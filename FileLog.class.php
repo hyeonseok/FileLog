@@ -180,6 +180,9 @@ class FileLog {
 	}
 
 	public function get_max($field_name) {
+		if ($this->structure === null) {
+			return 0;
+		}
 		$fp = fopen($this->file_name, 'r');
 		$is_first = true;
 		while (($buffer = fgets($fp)) !== false) {
