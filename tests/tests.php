@@ -2,7 +2,7 @@
 require('../FileLog.class.php');
 
 function tests($actual, $expected) {
-	if ($actual == $expected) {
+	if ($actual === $expected) {
 		echo('PASS' . "\n");
 	} else {
 		echo('FAIL' . "\n");
@@ -67,12 +67,12 @@ tests($db->load_by_date('2012-07-01 00:00:00', '2012-07-31 23:59:59', 'date'), a
 	0 => array (
 		'name' => 'P',
 		'body' => '2012-7-1 00:00:00',
-		'date' => strtotime('2012-7-1 00:00:00'),
+		'date' => (string)strtotime('2012-7-1 00:00:00'),
 	),
 	1 => array (
 		'name' => 'P',
 		'body' => '2012-7-31 23:59:59',
-		'date' => strtotime('2012-7-31 23:59:59'),
+		'date' => (string)strtotime('2012-7-31 23:59:59'),
 	),
 ));
 unlink('./data.tsv');
@@ -175,12 +175,12 @@ tests($db->load_by_month('7', '2012', 'date'), array(
 	0 => array (
 		'name' => 'P',
 		'body' => '2012-7-1 00:00:00',
-		'date' => strtotime('2012-7-1 00:00:00'),
+		'date' => (string)strtotime('2012-7-1 00:00:00'),
 	),
 	1 => array (
 		'name' => 'P',
 		'body' => '2012-7-31 23:59:59',
-		'date' => strtotime('2012-7-31 23:59:59'),
+		'date' => (string)strtotime('2012-7-31 23:59:59'),
 	),
 ));
 
@@ -190,12 +190,12 @@ tests($db->load_by_month('07', '2012', 'date'), array(
 	0 => array (
 		'name' => 'P',
 		'body' => '2012-7-1 00:00:00',
-		'date' => strtotime('2012-7-1 00:00:00'),
+		'date' => (string)strtotime('2012-7-1 00:00:00'),
 	),
 	1 => array (
 		'name' => 'P',
 		'body' => '2012-7-31 23:59:59',
-		'date' => strtotime('2012-7-31 23:59:59'),
+		'date' => (string)strtotime('2012-7-31 23:59:59'),
 	),
 ));
 unlink('./data.tsv');
