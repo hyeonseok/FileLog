@@ -178,5 +178,21 @@ class FileLog {
 
 		return $data;
 	}
+
+	public function get_max($field_name) {
+		$fp = fopen($this->file_name, 'r');
+		$is_first = true;
+		while (($buffer = fgets($fp)) !== false) {
+			if ($is_first || strlen(trim($buffer)) < 1) {
+				$is_first = false;
+				continue;
+			}
+			$formatted_row = $this->format_row($buffer);
+			$max = max($max, $formatted_row[$field_name]);
+		}
+		fclose($fp);
+
+		return $max;
+	}
 }
 ?>

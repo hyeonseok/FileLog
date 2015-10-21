@@ -157,6 +157,10 @@ tests($db->load_by_match('1', 'id'), array(array('id' => '1', 'name' => 'this is
 
 #19
 echo('#19: ');
+tests($db->get_max('id'), '22');
+
+#19
+echo('#19: ');
 tests($db->load_by_match('1', 'id', true), array('id' => '1', 'name' => 'this is 1-1'));
 unlink('tests_18.tsv');
 
