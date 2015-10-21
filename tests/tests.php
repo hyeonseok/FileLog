@@ -159,13 +159,13 @@ tests($db->load_by_match('1', 'id'), array(array('id' => '1', 'name' => 'this is
 echo('#19: ');
 tests($db->get_max('id'), '22');
 
-#19
-echo('#19: ');
+#20
+echo('#20: ');
 tests($db->load_by_match('1', 'id', true), array('id' => '1', 'name' => 'this is 1-1'));
 unlink('tests_18.tsv');
 
-#20
-echo('#20: ');
+#21
+echo('#21: ');
 $db = new FileLog('data.tsv');
 $db->save(array('name' => 'F', 'body' => '2012-6-30 22:05:17', 'date' => strtotime('2012-6-30 22:05:17')));
 $db->save(array('name' => 'P', 'body' => '2012-7-1 00:00:00', 'date' => strtotime('2012-7-1 00:00:00')));
@@ -184,8 +184,8 @@ tests($db->load_by_month('7', '2012', 'date'), array(
 	),
 ));
 
-#21
-echo('#21: ');
+#22
+echo('#22: ');
 tests($db->load_by_month('07', '2012', 'date'), array(
 	0 => array (
 		'name' => 'P',
