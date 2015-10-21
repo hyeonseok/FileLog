@@ -20,6 +20,10 @@ class FileLog {
 		}
 	}
 
+	public function get_structure() {
+		return $this->structure;
+	}
+
 	private function create_file() {
 		fwrite(fopen($this->file_name, 'w'), implode("\t", $this->structure) . "\n");
 	}
