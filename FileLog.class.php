@@ -76,6 +76,10 @@ class FileLog {
 		$data = array();
 		$count = 0;
 
+		if (!file_exists($this->file_name)) {
+			return $data;
+		}
+
 		$fp = fopen($this->file_name, 'r');
 		while (($buffer = fgets($fp)) !== false) {
 			if ($count == 0) {
@@ -106,6 +110,10 @@ class FileLog {
 	public function load_by_date($start_date, $end_date, $field_name) {
 		$data = array();
 
+		if (!file_exists($this->file_name)) {
+			return $data;
+		}
+
 		$fp = fopen($this->file_name, 'r');
 		while (($buffer = fgets($fp)) !== false) {
 			if (strlen(trim($buffer)) < 1) {
@@ -125,6 +133,10 @@ class FileLog {
 	public function load_by_month($month, $year, $field_name) {
 		$data = array();
 
+		if (!file_exists($this->file_name)) {
+			return $data;
+		}
+
 		$fp = fopen($this->file_name, 'r');
 		while (($buffer = fgets($fp)) !== false) {
 			if (strlen(trim($buffer)) < 1) {
@@ -143,6 +155,10 @@ class FileLog {
 
 	public function load_by_match($keyword, $field_name = null, $unique = false) {
 		$data = array();
+
+		if (!file_exists($this->file_name)) {
+			return $data;
+		}
 
 		$fp = fopen($this->file_name, 'r');
 		while (($buffer = fgets($fp)) !== false) {
@@ -166,6 +182,10 @@ class FileLog {
 
 	public function load_by_search($keyword, $field_name = null) {
 		$data = array();
+
+		if (!file_exists($this->file_name)) {
+			return $data;
+		}
 
 		$fp = fopen($this->file_name, 'r');
 		while (($buffer = fgets($fp)) !== false) {

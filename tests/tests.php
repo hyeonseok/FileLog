@@ -204,4 +204,8 @@ unlink('./data.tsv');
 echo('#23: ');
 $db = new FileLog('data.tsv');
 tests($db->get_max('id'), 0);
+
+#24
+echo('#24: ');
+tests(array_merge($db->load(), $db->load_by_match(null), $db->load_by_search(null)), array());
 ?>
