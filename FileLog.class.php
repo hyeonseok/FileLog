@@ -163,6 +163,7 @@ class FileLog {
 		}
 		$fp = fopen($this->file_name, 'r');
 		$is_first = true;
+		$max = 0;
 		while (($buffer = fgets($fp)) !== false) {
 			if ($is_first || strlen(trim($buffer)) < 1) {
 				$is_first = false;
