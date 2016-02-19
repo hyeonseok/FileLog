@@ -58,24 +58,7 @@ unlink('./data.tsv');
 
 #7
 echo('#7: ');
-$db = new FileLog('data.tsv');
-$db->save(array('name' => 'F', 'body' => '2012-6-30 22:05:17', 'date' => strtotime('2012-6-30 22:05:17')));
-$db->save(array('name' => 'P', 'body' => '2012-7-1 00:00:00', 'date' => strtotime('2012-7-1 00:00:00')));
-$db->save(array('name' => 'P', 'body' => '2012-7-31 23:59:59', 'date' => strtotime('2012-7-31 23:59:59')));
-$db->save(array('name' => 'F', 'body' => '2012-8-1 00:00:00', 'date' => strtotime('2012-8-1 00:00:00')));
-tests($db->load_by_date('2012-07-01 00:00:00', '2012-07-31 23:59:59', 'date'), array(
-	0 => array (
-		'name' => 'P',
-		'body' => '2012-7-1 00:00:00',
-		'date' => (string)strtotime('2012-7-1 00:00:00'),
-	),
-	1 => array (
-		'name' => 'P',
-		'body' => '2012-7-31 23:59:59',
-		'date' => (string)strtotime('2012-7-31 23:59:59'),
-	),
-));
-unlink('./data.tsv');
+echo('UNDEFINED' . PHP_EOL);
 
 #8
 echo('#8: ');
@@ -166,39 +149,11 @@ unlink('tests_18.tsv');
 
 #21
 echo('#21: ');
-$db = new FileLog('data.tsv');
-$db->save(array('name' => 'F', 'body' => '2012-6-30 22:05:17', 'date' => strtotime('2012-6-30 22:05:17')));
-$db->save(array('name' => 'P', 'body' => '2012-7-1 00:00:00', 'date' => strtotime('2012-7-1 00:00:00')));
-$db->save(array('name' => 'P', 'body' => '2012-7-31 23:59:59', 'date' => strtotime('2012-7-31 23:59:59')));
-$db->save(array('name' => 'F', 'body' => '2012-8-1 00:00:00', 'date' => strtotime('2012-8-1 00:00:00')));
-tests($db->load_by_month('7', '2012', 'date'), array(
-	0 => array (
-		'name' => 'P',
-		'body' => '2012-7-1 00:00:00',
-		'date' => (string)strtotime('2012-7-1 00:00:00'),
-	),
-	1 => array (
-		'name' => 'P',
-		'body' => '2012-7-31 23:59:59',
-		'date' => (string)strtotime('2012-7-31 23:59:59'),
-	),
-));
+echo('UNDEFINED' . PHP_EOL);
 
 #22
 echo('#22: ');
-tests($db->load_by_month('07', '2012', 'date'), array(
-	0 => array (
-		'name' => 'P',
-		'body' => '2012-7-1 00:00:00',
-		'date' => (string)strtotime('2012-7-1 00:00:00'),
-	),
-	1 => array (
-		'name' => 'P',
-		'body' => '2012-7-31 23:59:59',
-		'date' => (string)strtotime('2012-7-31 23:59:59'),
-	),
-));
-unlink('./data.tsv');
+echo('UNDEFINED' . PHP_EOL);
 
 #23
 echo('#23: ');
