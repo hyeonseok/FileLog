@@ -67,7 +67,6 @@ class FileLog {
 			$items[$value] = $this->encode_string($data[$value]);
 		}
 		$str = implode("\t", array_values($items)) . "\n";
-		$str = str_replace("\t\n", "\n", $str);
 		fwrite($fp, $str);
 		fclose($fp);
 	}
