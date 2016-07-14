@@ -126,7 +126,7 @@ class FileLog {
 		}
 		fclose($fp);
 
-		if ($unique) {
+		if ($unique && count($data) > 0) {
 			$data = $data[count($data) - 1];
 		}
 
